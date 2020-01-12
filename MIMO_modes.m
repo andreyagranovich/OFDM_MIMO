@@ -21,12 +21,15 @@ s = qpsk_symbols(bit_x);
 
 %% Generate Channel & Noise
 
-beta_coeffs_real = rand(1, paths_number)';
-beta_coeffs_imag = rand(1, paths_number)';
-channel_h = beta_coeffs_real + 1j*beta_coeffs_imag; % No need for time spacing between betas because of rich MP
+beta_coeffs_real = raylrnd(1, N)';
+beta_coeffs_imag = rand(1, N)';
+h = beta_coeffs_real + 1j*beta_coeffs_imag; % No need for time spacing between betas because of rich MP
 
 %% ML - We assume we already received a symbol which is "S" this symbol is multiplied by some coefficient and recives rayligh channel
 % we will create a SNR vector for which we will generate different values
 % of received symbols by adding coresponding noise
 
+SNR_db = linspace(0, 20, 100);
 
+% SISO - signal passes rayligh channel and receives random noise
+%y_SISO = h.*s + r
